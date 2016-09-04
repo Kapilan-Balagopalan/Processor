@@ -1,0 +1,3 @@
+This is a processor designed for downsampling an image.
+This can Communicate with the PC and receive the pixels in uart format and also the Assembly code. 
+Then the processor will run and give the output.
