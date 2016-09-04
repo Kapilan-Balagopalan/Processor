@@ -1,0 +1,19 @@
+NET "clk" LOC = L15;
+
+NET "rx" LOC = A16;
+
+
+//NET "Ram[1]" LOC = M14;
+
+# PlanAhead Generated physical consRamaints 
+
+
+//NET "Ram[0]" LOC = U18;
+//NET "Ram[2]" LOC = N14;
+//NET "Ram[3]" LOC = L14;
+//NET "Ram[4]" LOC = M13;
+NET "endda" LOC = D14;
+//NET "clkr" LOC = P16;
+NET "cs" LOC = N12;
+NET "tx" LOC =  B16;
+NET "led" LOC = P16;

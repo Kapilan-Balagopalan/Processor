@@ -1,0 +1,138 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    14:04:46 07/17/2016 
+// Design Name: 
+// Module Name:    MicroStore 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module Microstore(clk, en, addr, data);
+ input       clk;
+ input       en;
+ input [7:0] addr;
+ output [23:0] data;
+ reg [23:0] data;
+ //reg [23:0] data;
+ reg   [7:0] raddr;
+ initial begin
+ data =24'b000001011100100000000010;
+ end
+ always @(negedge clk)
+ begin
+   
+       raddr <= addr;
+ end
+parameter  FETCH1 = 8'b00000000,FETCH2 = 8'b00000001,FETCH3 = 8'b00000010,FETCH4 = 8'b00000011,
+				LDAC1=8'b00000100,
+				LDAC2= 8'b00000101,LDAC3= 8'b00000110,LDAC4= 8'b00000111,LDAC5= 8'b00001000,LDAC6= 8'b00001001,
+				STAC1 = 8'b00001010,STAC2 = 8'b00001011,STAC3 = 8'b00001100,STAC4 = 8'b00001101,
+				MOVACR = 8'b00001110,
+				SHIFT1 = 8'b00001111,
+				SHIFT2 = 8'b00010000,
+				ADD = 8'b00010001,
+				INAC= 8'b00010010,
+				MVR= 8'b00010011,
+				MVTR = 8'b00010100,
+				MVACT = 8'b00010101,
+				SUB = 8'b0010110,
+				CLAC = 8'b00010111,
+				JUMP1 = 8'b00011000, JUMP2 = 8'b00011001, JUMP3 = 8'b00011010,
+				JMPZ = 8'b00011011,
+				JMPZN = 8'b00011100,
+				JMPZY1 = 8'b10011100,JMPZY2 = 8'b10011101,JMPZY3 = 8'b10011110,
+				NOP = 8'b00011101,
+				END = 8'b00011110,
+				LDLDAC1 = 8'b00011111,LDLDAC2 = 8'b00100000,LDLDAC3 = 8'b00100001 ,LDLDAC4 = 8'b00100010 , LDLDAC5 = 8'b00100011,
+				LDLDAC6 = 8'b00100100 , LDLDAC7=8'b00100101 , LDLDAC8 = 8'b00100110 , LDLDAC9 =8'b00100111,
+				STSTAC1 = 8'b00101000 , STSTAC2 = 8'b00101001 , STSTAC3 = 8'b00101010 , STSTAC4 = 8'b00101011  , STSTAC5 = 8'b00101100,
+				STSTAC6 = 8'b00101101 , STSTAC7 = 8'b00101110;
+/*assign datat[0] = data[23];
+assign datat[8:1]= data[22:15];
+assign datat[9] = data[14];
+assign datat [10] = data[13];
+assign datat [13:11] = data [12:10];
+assign datat [16:14] = data [9:7];
+assign datat [19:17] = data [6:4];
+assign datat [23:20] = data [3:0];*/
+ always @(raddr) 
+ begin
+  
+       case(raddr)
+			
+					FETCH1:data = 24'b000001011100100000000010;
+					FETCH2:data = 24'b000011111101100000000100;
+					FETCH3:data = 24'b000011101001100000000110;
+					FETCH4:data = 24'b000001100111001000000000;
+					
+					LDAC1:data = 24'b000011111101100000001010;
+					LDAC2:data = 24'b000011101001100000001100;
+					LDAC3:data = 24'b000001111100100000001110;
+					LDAC4:data = 24'b000011111101100000010000;
+					LDAC5:data= 24'b000011111101100000010010;
+					LDAC6:data = 24'b101001111100000000000000;
+					
+					
+					STAC1:data = 24'b000011111101100000010110;
+					STAC2:data = 24'b000011101001100000011000;
+					STAC3:data = 24'b000001111100100000011010;
+					STAC4:data = 24'b000000011111100000000000;
+					
+					MOVACR:data = 24'b000000011110100000000000;
+					SHIFT1:data = 24'b100000011100000000000000;
+					SHIFT2:data = 24'b100100011100000000000000;
+					
+					ADD:data = 24'b000110111100000000000000;
+					INAC:data = 24'b000010100010100000000000;
+					MVR:data = 24'b101010111100000000000000;
+				   MVTR:data = 24'b101010011100000000000000;
+					MVACT:data = 24'b000000011110000000000000;
+					SUB:data = 24'b001010111100000000000000;
+					CLAC:data = 24'b101110111100000000000000;
+					JUMP1:data = 24'b000011111101100000110010;
+					JUMP2:data = 24'b000011111101100000110100;
+					JUMP3:data = 24'b000001111101000000000000;
+					JMPZ:data = 24'b000010111110110000111000;
+					JMPZN:data = 24'b000010101010100000000000;
+					NOP:data =   24'b000010011110000000000000;
+					
+					JMPZY1:data = 24'b000011111101100100111010;
+					JMPZY2:data = 24'b000011111101100100111100;
+					JMPZY3:data = 24'b000001111101000000000000;
+					END : data =  24'b000001111101100000111101;
+					
+					LDLDAC1:data = 24'b000011111101100001000000;
+					LDLDAC2:data = 24'b000011101001100001000010;
+					LDLDAC3:data = 24'b000001111100100001000100;
+					LDLDAC4:data = 24'b000011111101100001000110;
+					LDLDAC5:data=  24'b000011111101100001001000;
+					LDLDAC6:data = 24'b000001111100100001001010;
+					LDLDAC7:data = 24'b000011111101100001001100;
+					LDLDAC8:data = 24'b000011111101100001001110;
+					LDLDAC9:data = 24'b101001111100000000000000;
+					
+					STSTAC1:data = 24'b000011111101100001010010;
+					STSTAC2:data = 24'b000011101001100001010100;
+					STSTAC3:data = 24'b000001111100100001010110;
+					STSTAC4:data = 24'b000011111101100001011000;
+					STSTAC5:data = 24'b000011111101100001011010;
+					STSTAC6:data = 24'b000001111100100001011100;
+					STSTAC7:data = 24'b000000011111100000000000;
+					
+					
+
+			default: data = 24'b000010011110000000000000;
+       endcase
+end
+        endmodule
